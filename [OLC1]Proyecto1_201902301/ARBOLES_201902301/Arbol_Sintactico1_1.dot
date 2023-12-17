@@ -6,7 +6,7 @@ node [shape = circle, color="#06346A"];node0[label = "." ];
 node0 -- node00
 node00[label = "." ];
 node00 -- node000
-node000[label = "letraa", shape = oval ];
+node000[label = "sebas", shape = oval ];
 node00 -- node001
 node001[label = "*"shape=doublecircle, color=red ];
 node001 -- node0010

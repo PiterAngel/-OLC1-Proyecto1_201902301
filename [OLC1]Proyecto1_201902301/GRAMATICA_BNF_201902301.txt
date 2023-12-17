@@ -1,0 +1,39 @@
+<INICIO> ::= llavea:<a> <INSTRUCCIONES>:<b> llavec
+           | error;
+
+<INSTRUCCIONES> ::= <INSTRUCCIONES>:<a> <INSTRUCCION>:<b>
+                | <INSTRUCCION>:<a>;
+
+<INSTRUCCION> ::= id:<a> guion ma_que <ER>:<b> pnt_coma
+              | pr_conj dos_ptn id:<a> guion ma_que <CONJ>:<b> pnt_coma
+              | error;
+
+<ER> ::= or:<a> <ER>:<b> <ER>:<c>
+      | pnt:<a> <ER>:<b> <ER>:<c>
+      | por:<a> <ER>:<b>
+      | mas:<a> <ER>:<b>
+      | question:<a> <ER>:<b>
+      | para id:<a> parc
+      | id:<a>
+      | cadena:<a>
+      | <ESCAPE>:<a>;
+
+<ESCAPE> ::= comilla:<a>
+          | guion_bajo:<a>
+          | simple:<a>
+          | salto:<a>;
+
+<CONJ> ::= <F>:<a> rango <F>:<b>
+        | <F>:<a> guion <F>:<b>
+        | <CONJ_ARR>:<a>;
+
+<CONJ_ARR> ::= <CONJ_ARR>:<a> coma <F>:<b>
+           | <F>:<a>;
+
+<F> ::= numero:<a>
+    | id:<a>
+    | <SIMBOLOS>:<a>;
+
+<SIMBOLOS> ::= guion:<a>
+           | guion_bajo:<a>
+           | admiracion:<a>;

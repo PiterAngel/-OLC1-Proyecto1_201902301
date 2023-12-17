@@ -10,22 +10,13 @@ digraph H {
             <td bgcolor="#19CD9F" colspan="999">Terminales</td>
         </tr>
        
-               <tr>            <td>sebas</td> 
-            <td>_</td> 
-            <td>letra</td> 
-            <td>digito</td> 
+               <tr>            <td>bool</td> 
         </tr>
         <tr>
             <td  >S0 </td>            <td>S1</td> 
-            <td> --</td>
-            <td> --</td>
-            <td> --</td>
             </tr> 
         <tr>
-            <td bgcolor="#D8D364" >S1 </td>            <td> --</td>
-            <td>S1</td> 
-            <td>S1</td> 
-            <td>S1</td> 
+            <td bgcolor="#D8D364" >S1 </td>            <td>S1</td> 
             </tr> 
      </table>
   >];

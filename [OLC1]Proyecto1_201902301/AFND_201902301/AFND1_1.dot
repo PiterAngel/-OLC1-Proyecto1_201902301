@@ -4,7 +4,7 @@ digraph AFD{
 node [shape = circle]
 nodeh1_0[label = ""] 
 nodeh1_1[label = ""] 
-nodeh1_0->nodeh1_1[label= "letraa"]; 
+nodeh1_0->nodeh1_1[label= "sebas"]; 
 nodeh2_0[label = ""] 
 nodeh2_1[label = ""] 
 nodeh2_0->nodeh2_1[label= "_"]; 

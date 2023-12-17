@@ -354,6 +354,7 @@ public class Proyecto1 extends javax.swing.JFrame {
             //Recorremos la lista de expresiones de nuestro archivo de entrada
             for(int i = 0; i < lista_er.size(); i++){
                 System.out.println("Expresion " + i);
+                
                 if(lista_er.get(i) != null){
                     //Extraemos el arbol y graficamos
                     if (lista_er.get(i) instanceof Expresiones) {
@@ -370,10 +371,12 @@ public class Proyecto1 extends javax.swing.JFrame {
                         //añadir expresion regular al combobox
                         
                         model.addElement(clase.getId());
+                        jTextArea2.append("Expresion regular añadida: " + clase.getId() + "\n");
                         
                     }else if (lista_er.get(i) instanceof Conjunto){
                         Conjunto clase = (Conjunto) lista_er.get(i);
                         sim.agregarConjunto(clase);
+                        
                     }
                 }
                 

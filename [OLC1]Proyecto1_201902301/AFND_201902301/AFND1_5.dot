@@ -1,0 +1,33 @@
+digraph AFD{
+
+ rankdir=LR;
+node [shape = circle]
+nodeh2_0[label = ""] 
+nodeh2_1[label = ""] 
+nodeh2_0->nodeh2_1[label= "bool"]; 
+nodeh3_0[label = ""] 
+nodeh3_1[label = ""] 
+nodeh3_0->nodeh3_1[label= "bool"]; 
+nodeh2_1[label = ""] 
+nodo0001_1[label = ""] 
+nodeh2_1->nodeh3_0[label= "ε"]; 
+nodeh3_1->nodo0001_1[label= "ε"]; 
+nodeh3_1->nodeh3_0[label= "ε" , constraint=false]; 
+nodeh2_1->nodo0001_1[label= "ε" , constraint=false]; 
+nodo0001_1[label = ""] 
+nodeh4_1[label = ""] 
+nodo0001_1->nodeh4_1[label= "."]; 
+nodeh4_1[label = ""] 
+nodeh5_1[label = ""] 
+nodeh4_1->nodeh5_1[label= "bool"]; 
+nodeh6_0[label = ""] 
+nodeh6_1[label = ""] 
+nodeh6_0->nodeh6_1[label= "bool"]; 
+nodeh5_1[label = ""] 
+nodo011_1[label = ""] 
+nodeh5_1->nodeh6_0[label= "ε"]; 
+nodeh6_1->nodo011_1[label= "ε"]; 
+nodeh6_1->nodeh6_0[label= "ε" , constraint=false]; 
+nodeh5_1->nodo011_1[label= "ε" , constraint=false]; 
+nodo011_1[label = "", shape=doublecircle ] 
+}

@@ -53,8 +53,6 @@ comentario_simple    = "//" {InputCharacter}* {LineTerminator}?
 
 //--------------- Simbolos
 
-<YYINITIAL>"%%"        { System.out.println("Reconocio "+yytext()+" dobleporc"); return new Symbol(sym.dobleporc, yycolumn, yyline, yytext()); }
-<YYINITIAL>"="         { System.out.println("Reconocio "+yytext()+" igual"); return new Symbol(sym.igual, yycolumn, yyline, yytext()); }
 <YYINITIAL>";"         { System.out.println("Reconocio "+yytext()+" pnt_coma"); return new Symbol(sym.pnt_coma, yycolumn, yyline, yytext()); }
 <YYINITIAL>"."         { System.out.println("Reconocio "+yytext()+" pnt"); return new Symbol(sym.pnt, yycolumn, yyline, yytext()); }
 <YYINITIAL>"*"         { System.out.println("Reconocio "+yytext()+" por"); return new Symbol(sym.por, yycolumn, yyline, yytext()); }
@@ -75,8 +73,7 @@ comentario_simple    = "//" {InputCharacter}* {LineTerminator}?
 <YYINITIAL>"?"         { System.out.println("Reconocio "+yytext()+" question"); return new Symbol(sym.question, yycolumn, yyline, yytext()); }
 <YYINITIAL>","         { System.out.println("Reconocio "+yytext()+" coma"); return new Symbol(sym.coma, yycolumn, yyline, yytext()); }
 <YYINITIAL>"!"         { System.out.println("Reconocio "+yytext()+" admiracion"); return new Symbol(sym.admiracion, yycolumn, yyline, yytext()); }
-<YYINITIAL>"&"         { System.out.println("Reconocio "+yytext()+" and"); return new Symbol(sym.and, yycolumn, yyline, yytext()); }
-<YYINITIAL>"%"         { System.out.println("Reconocio "+yytext()+" porcent"); return new Symbol(sym.porcent, yycolumn, yyline, yytext()); }
+
 
 
 //---------- Estructura de las ER

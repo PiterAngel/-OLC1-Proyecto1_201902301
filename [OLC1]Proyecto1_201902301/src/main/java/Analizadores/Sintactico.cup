@@ -49,10 +49,9 @@ parser code
 :} 
 
 // ----------------- Terminales ----------------------
-terminal String dobleporc, igual, por, mas, pnt, pnt_coma, or, para, parc, llavea, 
+terminal String  por, mas, pnt, pnt_coma, or, para, parc, llavea, 
                 llavec, pr_er, numero, cadena, id, comilla, simple, salto, pr_conj,
-                dos_ptn, guion, ma_que, rango, question, coma, guion_bajo, admiracion,
-                and, porcent;
+                dos_ptn, guion, ma_que, rango, question, coma, guion_bajo, admiracion;
 
 // --------------- NO terminales -----------
 non terminal LinkedList<Object> INICIO, INSTRUCCIONES;
@@ -177,6 +176,4 @@ F::= numero:a            {: RESULT = a; :}
 SIMBOLOS::=     guion:a            {: RESULT = a; :}
             | guion_bajo:a         {: RESULT = a; :}
             | admiracion:a         {: RESULT = a; :}
-            | and:a                {: RESULT = a; :}
-            | porcent:a            {: RESULT = a; :}
             ;
