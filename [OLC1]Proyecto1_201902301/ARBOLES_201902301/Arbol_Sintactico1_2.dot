@@ -1,0 +1,47 @@
+graph Arbol_Sintactico{
+
+graph [pad="0.5", nodesep="1.2", ranksep="0.2"];
+edge [penwidth=2, color="#48BADC"];
+node [shape = circle, color="#06346A"];node0[label = "." ];
+node0 -- node00
+node00[label = "." ];
+node00 -- node000
+node000[label = "digito", shape = oval ];
+node00 -- node001
+node001[label = "." ];
+node001 -- node0010
+node0010[label = "*"shape=doublecircle, color=red ];
+node0010 -- node00100
+node00100[label = ".", shape = oval ];
+node001 -- node0011
+node0011[label = "+" ];
+node0011 -- node00110
+node00110[label = "digito", shape = oval ];
+node0 -- node01
+node01[label = "#",shape=doublecircle, color="#2BFF1D" ];
+
+ edge [penwidth=0];node0:w--node0:w[taillabel="1"]
+node0:e--node0:e[taillabel="4"]
+node00:w--node00:w[taillabel="1"]
+node00:e--node00:e[taillabel="3"]
+node000:w--node000:w[taillabel="1"]
+node000:e--node000:e[taillabel="1"]
+node000:s--node000:s[taillabel="1"]
+node001:w--node001:w[taillabel="2,3"]
+node001:e--node001:e[taillabel="3"]
+node0010:w--node0010:w[taillabel="2"]
+node0010:e--node0010:e[taillabel="2"]
+node00100:w--node00100:w[taillabel="2"]
+node00100:e--node00100:e[taillabel="2"]
+node00100:s--node00100:s[taillabel="2"]
+node0011:w--node0011:w[taillabel="3"]
+node0011:e--node0011:e[taillabel="3"]
+node00110:w--node00110:w[taillabel="3"]
+node00110:e--node00110:e[taillabel="3"]
+node00110:s--node00110:s[taillabel="3"]
+node01:w--node01:w[taillabel="4"]
+node01:e--node01:e[taillabel="4"]
+node01:s--node01:s[taillabel="4"]
+
+
+}

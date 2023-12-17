@@ -1,0 +1,48 @@
+digraph AFD{
+
+ rankdir=LR;
+node [shape = circle]
+nodeh1_0[label = ""] 
+nodeh1_1[label = ""] 
+nodeh1_0->nodeh1_1[label= "digito"]; 
+nodeh2_0[label = ""] 
+nodeh2_1[label = ""] 
+nodeh2_0->nodeh2_1[label= "_"]; 
+nodo0100_0[label = ""] 
+nodo0100_1[label = ""] 
+nodo0100_0->nodeh2_0[label= "ε"]; 
+nodeh2_1->nodo0100_1[label= "ε"]; 
+nodeh2_1->nodeh2_0[label= "ε" , constraint=false]; 
+nodo0100_0->nodo0100_1[label= "ε" , constraint=false]; 
+nodeh3_0[label = ""] 
+nodeh3_1[label = ""] 
+nodeh3_0->nodeh3_1[label= "letra"]; 
+nodeh4_0[label = ""] 
+nodeh4_1[label = ""] 
+nodeh4_0->nodeh4_1[label= "digito"]; 
+nodo01010_0[label = ""] 
+nodo01010_1[label = ""] 
+nodo01010_0->nodeh3_0[label= "ε"]; 
+nodo01010_0->nodeh4_0[label= "ε"]; 
+nodeh3_1->nodo01010_1[label= "ε"]; 
+nodeh4_1->nodo01010_1[label= "ε"]; 
+nodo0101_0[label = ""] 
+nodo0101_1[label = ""] 
+nodo0101_0->nodo01010_0[label= "ε"]; 
+nodo01010_1->nodo0101_1[label= "ε"]; 
+nodo01010_1->nodo01010_0[label= "ε" , constraint=false]; 
+nodo0101_0->nodo0101_1[label= "ε" , constraint=false]; 
+nodo010_0[label = ""] 
+nodo010_1[label = ""] 
+nodo010_0->nodo0100_0[label= "ε"]; 
+nodo010_0->nodo0101_0[label= "ε"]; 
+nodo0100_1->nodo010_1[label= "ε"]; 
+nodo0101_1->nodo010_1[label= "ε"]; 
+nodeh1_1[label = ""] 
+nodo01_1[label = ""] 
+nodeh1_1->nodo010_0[label= "ε"]; 
+nodo010_1->nodo01_1[label= "ε"]; 
+nodo010_1->nodo010_0[label= "ε" , constraint=false]; 
+nodeh1_1->nodo01_1[label= "ε" , constraint=false]; 
+nodo01_1[label = "", shape=doublecircle ] 
+}

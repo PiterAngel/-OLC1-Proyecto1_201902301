@@ -1,0 +1,30 @@
+digraph H {
+ dpi=200; 
+    graph [label=< <font color= "#290524" face="Impact" size="30">Tabla de Transiciones</font> >];
+  parent [
+   shape=plaintext
+   label=<
+     <table border='0' cellborder='1' cellspacing='0'>
+       <tr>
+            <td bgcolor="#19CD9F"  rowspan="2" colspan="1">Estado</td>
+            <td bgcolor="#19CD9F" colspan="999">Terminales</td>
+        </tr>
+       
+               <tr>            <td>digito</td> 
+            <td>"."</td> 
+        </tr>
+        <tr>
+            <td  >S0 </td>            <td>S1</td> 
+            <td> --</td>
+            </tr> 
+        <tr>
+            <td  >S1 </td>            <td>S2</td> 
+            <td>S1</td> 
+            </tr> 
+        <tr>
+            <td bgcolor="#D8D364" >S2 </td>            <td>S2</td> 
+            <td> --</td>
+            </tr> 
+     </table>
+  >];
+}

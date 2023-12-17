@@ -1,0 +1,182 @@
+// ------------ Package e importaciones ----------------------
+package Analizadores; 
+import java_cup.runtime.*;
+
+import com.mycompany.proyecto1.Nodo;
+import com.mycompany.proyecto1.Expresiones;
+import com.mycompany.proyecto1.TIPOS;
+import com.mycompany.proyecto1.Pruebas;
+
+
+import com.mycompany.proyecto1.Proyecto1;
+import com.mycompany.proyecto1.error;
+import com.mycompany.proyecto1.Arbol;
+import com.mycompany.proyecto1.Hojas;
+
+import Simbolos.Conjunto;
+import Simbolos.Rango;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+// ------------------- parser, variable, metodos en java -------------------
+parser code 
+{:
+        public static Nodo raiz;
+        public static LinkedList<Object> lista_er;
+        public static LinkedList<Pruebas> lista_pruebas;
+        public int conthojas=1;
+
+        public ArrayList<Nodo> hojas = new ArrayList();
+        public ArrayList<ArrayList> tabla = new ArrayList(); 
+
+        public void syntax_error(Symbol s)
+        {
+            System.err.println("Error en la Linea " + (s.right+1) +" Columna "+(s.left+1)+ ". Identificador "+s.value + " no reconocido. Se ha recuperado del error." );
+            error nuevo = new error("Sintactico (Recuperado)", "Error de sintaxis detectado en: " + s.value.toString(), s.right+1, s.left+1);
+            Proyecto1.listaErrores.add(nuevo);
+        }
+        public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception
+        {
+            System.err.println("Error en la Linea " + (s.right+1)+ " Columna "+(s.left+1)+". Identificador " +s.value + " no reconocido.");
+            error nuevo = new error("Sintactico (Irrecuperable)", s.value.toString(), s.right+1, s.left+1);
+            Proyecto1.listaErrores.add(nuevo);
+        }
+
+        public Nodo getRaiz(){
+            return raiz;
+        }
+:} 
+
+// ----------------- Terminales ----------------------
+terminal String dobleporc, igual, por, mas, pnt, pnt_coma, or, para, parc, llavea, 
+                llavec, pr_er, numero, cadena, id, comilla, simple, salto, pr_conj,
+                dos_ptn, guion, ma_que, rango, question, coma, guion_bajo, admiracion,
+                and, porcent;
+
+// --------------- NO terminales -----------
+non terminal LinkedList<Object> INICIO, INSTRUCCIONES;
+
+non terminal Object INSTRUCCION;
+
+non terminal Nodo ER;
+
+non terminal LinkedList<Character> CONJ, CONJ_ARR;
+
+non terminal String F;
+
+non terminal LinkedList<Pruebas> PRUEBAS;
+non terminal Pruebas PRUEBA;
+non terminal String ESCAPE;
+non terminal String SIMBOLOS;
+
+// --------------------- Precedencia (menor a mayor) ------------
+precedence left pnt;
+precedence left or;
+precedence left por;
+precedence left mas;
+precedence left para;
+
+// -------------------- Producciones, reglas semanticas -------------------
+start with INICIO;
+
+INICIO::= llavea:a INSTRUCCIONES:b  llavec  {:  parser.lista_er = b;  :}
+         | error;
+
+INSTRUCCIONES ::= INSTRUCCIONES:a INSTRUCCION:b  {: RESULT = a; RESULT.add(b); :}
+                | INSTRUCCION:a                  {: RESULT = new LinkedList<>(); RESULT.add(a); :}
+                ;
+
+INSTRUCCION::= id:a guion ma_que ER:b pnt_coma                                //id -> . {letra} * {digito} ;
+            {: 
+                Nodo nd =new Nodo("#",TIPOS.CADENA, "", parser.conthojas, null, null, parser.hojas, parser.tabla);
+                Hojas hoja = new Hojas();
+                hoja.addLeave(nd, parser.hojas);
+                parser.conthojas++; 
+                
+                Nodo n = new Nodo(".", TIPOS.SIMBOLO, "", -1, b, nd, parser.hojas, parser.tabla);
+
+                RESULT = new Expresiones(a.toString(), new Arbol(n, parser.hojas, parser.tabla)); 
+                parser.conthojas = 1;
+                parser.hojas = new ArrayList();
+                parser.tabla = new ArrayList();
+            :}
+            | pr_conj dos_ptn id:a guion ma_que CONJ:b pnt_coma              //CONJ : id -> a~z ;
+            {: 
+                RESULT = new Conjunto(a.toString(), b);
+            :}
+            | error
+            ;
+
+ER::= or:a ER:b ER:c                {: RESULT=new Nodo("|", TIPOS.SIMBOLO, "", -1, b, c, parser.hojas, parser.tabla); :}
+    | pnt:a ER:b ER:c               {: RESULT=new Nodo(".", TIPOS.SIMBOLO, "", -1, b, c, parser.hojas, parser.tabla); :}
+    | por:a ER:b                    {: RESULT=new Nodo("*", TIPOS.SIMBOLO, "", -1, b, null, parser.hojas, parser.tabla); :}
+    | mas:a ER:b                    {: RESULT=new Nodo("+", TIPOS.SIMBOLO, "", -1, b, null, parser.hojas, parser.tabla); :}
+    | question:a ER:b               {: RESULT=new Nodo("?", TIPOS.SIMBOLO, "", -1, b, null, parser.hojas, parser.tabla); :}
+    | para id:a parc                         
+        {:
+                Nodo nd =new Nodo(a.toString(),TIPOS.ID, "", parser.conthojas, null, null, parser.hojas, parser.tabla);
+                Hojas hoja = new Hojas();
+                hoja.addLeave(nd, parser.hojas);
+                parser.conthojas++; 
+                RESULT = nd;
+        :}
+    | id:a                         
+        {:
+                Nodo nd =new Nodo(a.toString(),TIPOS.ID, "", parser.conthojas, null, null, parser.hojas, parser.tabla);
+                Hojas hoja = new Hojas();
+                hoja.addLeave(nd, parser.hojas);
+                parser.conthojas++; 
+                RESULT = nd;
+        :}
+    | cadena:a                     
+        {: 
+                Nodo nd =new Nodo(a.toString(),TIPOS.CADENA, "", parser.conthojas, null, null, parser.hojas, parser.tabla);
+                Hojas hoja = new Hojas();
+                hoja.addLeave(nd, parser.hojas);
+                parser.conthojas++; 
+                RESULT = nd; 
+        :}
+    | ESCAPE:a                     
+        {: 
+                Nodo nd =new Nodo(a.toString(),TIPOS.ESCAPE, "", parser.conthojas, null, null, parser.hojas, parser.tabla);
+                Hojas hoja = new Hojas();
+                hoja.addLeave(nd, parser.hojas);
+                parser.conthojas++; 
+                RESULT = nd; 
+        :}
+    ;
+
+
+ESCAPE::=    comilla:a                {: RESULT = a;   :}
+            | guion_bajo:a            {: RESULT = a;   :}
+            |   simple:a              {: RESULT = a;   :}
+            |   salto:a               {: RESULT = a;   :}
+            ;
+
+CONJ::=    F:a rango F:b               {: 
+                                            Rango rango =new Rango(a,b); 
+                                            RESULT = rango.Arreglo();
+                                       :}
+            | F:a guion F:b               {: 
+                                            Rango guion =new Rango(a,b); 
+                                            RESULT = guion.Arreglo();
+                                       :}
+            |   CONJ_ARR:a             {:   RESULT = a;   :}
+            ;
+
+CONJ_ARR::=   CONJ_ARR:a coma F:b      {: RESULT = a; RESULT.add(b.charAt(0)); :}
+            | F:a                      {: RESULT = new LinkedList<Character>(); RESULT.add(a.charAt(0)); :}
+            ; 
+
+F::= numero:a            {: RESULT = a; :}
+    | id:a               {: RESULT = a; :}
+    | SIMBOLOS:a          {: RESULT = a; :}
+    ; 
+
+SIMBOLOS::=     guion:a            {: RESULT = a; :}
+            | guion_bajo:a         {: RESULT = a; :}
+            | admiracion:a         {: RESULT = a; :}
+            | and:a                {: RESULT = a; :}
+            | porcent:a            {: RESULT = a; :}
+            ;

@@ -1,0 +1,32 @@
+digraph H {
+ dpi=200; 
+    graph [label=< <font color= "#290524" face="Impact" size="30">Tabla de siguientes</font> >];
+  parent [
+   shape=plaintext
+   label=<
+     <table border='0' cellborder='1' cellspacing='0'>
+       <tr>
+            <td bgcolor="#1EA59B" colspan="2">Hoja</td>
+            <td bgcolor="#1EA59B" colspan="1">Siguientes</td>
+        </tr>
+       
+       <tr>
+            <td>2</td>
+            <td>_</td>
+            <td>[2, 3, 4, 5]</td>
+        </tr><tr>
+            <td>3</td>
+            <td>letra</td>
+            <td>[3, 4, 2, 5]</td>
+        </tr><tr>
+            <td>4</td>
+            <td>digito</td>
+            <td>[3, 4, 2, 5]</td>
+        </tr><tr>
+            <td>1</td>
+            <td>letraa</td>
+            <td>[2, 3, 4, 5]</td>
+        </tr>
+     </table>
+  >];
+}
